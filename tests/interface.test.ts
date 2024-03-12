@@ -87,4 +87,21 @@ describe('Interface', () => {
     expect(manager).toHaveProperty('division');
     expect(manager).toHaveProperty('numberOfEmployee');
   });
+
+  it('should support function in interface', () => {
+    interface Person {
+      name: string,
+      sayHello(name: string): string,
+    }
+
+    const person: Person = {
+      name: 'Hidayat',
+      sayHello: function (name: string) {
+        return `Hello ${name}, my name is ${this.name}`
+      }
+    };
+
+    expect(person.name).toBe('Hidayat');
+    expect(person.sayHello('Andi')).toBe('Hello Andi, my name is Hidayat');
+  });
 });
