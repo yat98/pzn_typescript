@@ -104,4 +104,24 @@ describe('Interface', () => {
     expect(person.name).toBe('Hidayat');
     expect(person.sayHello('Andi')).toBe('Hello Andi, my name is Hidayat');
   });
+
+  it('should support intersection types', () => {
+    interface HasName {
+      name: string
+    }
+    
+    interface HasId{
+      id: string
+    }
+    
+    type Domain = HasName & HasId
+
+    const domain: Domain = {
+      id: '123',
+      name: 'Hidayat'
+    };
+
+    expect(domain).toHaveProperty('id');
+    expect(domain).toHaveProperty('name');
+  });
 });
