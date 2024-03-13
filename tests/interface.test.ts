@@ -1,5 +1,6 @@
 import { Employee, Manager } from "../src/employee";
 import { Seller } from "../src/interface";
+import { Person } from "../src/person";
 
 describe('Interface', () => {
   it('should support in typescript', () => {
@@ -89,11 +90,6 @@ describe('Interface', () => {
   });
 
   it('should support function in interface', () => {
-    interface Person {
-      name: string,
-      sayHello(name: string): string,
-    }
-
     const person: Person = {
       name: 'Hidayat',
       sayHello: function (name: string) {
@@ -123,5 +119,20 @@ describe('Interface', () => {
 
     expect(domain).toHaveProperty('id');
     expect(domain).toHaveProperty('name');
+  });
+
+  it('should support type assertions', () => {
+    const person: any = {
+      name: "Hidayat",
+      age: 25,
+    };
+    
+    const person2: Person = person as Person;
+
+    // Age not found
+    // person2.age = 2;
+    // Method not found
+    // person2.sayHello('Eko');
+    expect(person2).toHaveProperty('age');
   });
 });
