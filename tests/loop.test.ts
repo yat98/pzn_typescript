@@ -21,4 +21,17 @@ describe('Loop', () => {
     expect(infoSpy).toHaveBeenCalled();
     expect(infoSpy).toHaveBeenCalledTimes(6);
   });
+
+  it('should support for while loop', () => {
+    let counter: number = 0;
+    const logSpy = jest.spyOn(global.console, 'log');
+
+    while(counter < 10) {
+      console.log(counter);
+      counter++;
+    }
+
+    expect(logSpy).toHaveBeenCalled();
+    expect(logSpy).toHaveBeenCalledTimes(10);
+  });
 });
