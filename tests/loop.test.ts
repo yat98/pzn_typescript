@@ -47,5 +47,29 @@ describe('Loop', () => {
 
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledTimes(1);
+    jest.clearAllMocks();
+  });
+
+  it('should support break and continue', () => {
+    let counter = 0;
+    const logSpy = jest.spyOn(global.console, 'log');
+
+    do {
+      counter++;
+
+      if(counter === 10) {
+        break;
+      }
+
+      if(counter % 2 === 0) {
+        continue;
+      }
+
+      console.log(counter);
+    } while(true);
+
+    expect(logSpy).toHaveBeenCalled();
+    expect(logSpy).toHaveBeenCalledTimes(5);
+    jest.clearAllMocks();
   });
 });
