@@ -34,4 +34,18 @@ describe('Loop', () => {
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledTimes(10);
   });
+
+  it('should support do while loop', () => {
+    let counter: number = 10;
+    jest.clearAllMocks();
+    const logSpy = jest.spyOn(global.console, 'log');
+
+    do {
+      console.log(counter);
+      counter++;
+    } while(counter < 10);
+
+    expect(logSpy).toHaveBeenCalled();
+    expect(logSpy).toHaveBeenCalledTimes(1);
+  });
 });
