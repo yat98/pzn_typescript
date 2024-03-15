@@ -6,4 +6,8 @@ export class Customer {
   constructor(id: number) {
     this.id = id;
   }
+
+  sayHello(name: string): void {
+    console.info(`Hello ${name}, my name is ${this.name}`);
+  }
 }
