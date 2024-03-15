@@ -48,6 +48,43 @@ describe('Function', () => {
 
     expect(sayHello('Hidayat')).toBe('Hello, Hidayat');
     expect(sayHello('Hidayat', 'Chandra')).toBe('Hello, Hidayat Chandra');
+  });
 
+  it('should support function overloading', () => {
+    function callMe(name: string): string;
+
+    function callMe(name: number): number;
+
+    function callMe(value: any): any {
+      if(typeof value=== 'string') {
+        return value.toUpperCase();
+      }else if(typeof value === 'number') {
+        return value * 10;
+      }
+    }
+
+    expect(callMe(10)).toBe(100);
+    expect(typeof callMe(10)).toBe('number');
+
+    expect(callMe('hello')).toBe('HELLO');
+    expect(typeof callMe('hello')).toBe('string');
+  });
+
+  it('should support function as parameter', () => {
+    function sayHello(name: string, filter: (name: string) => string) {
+      return `Hello, ${filter(name)}`;
+    }
+
+    function toUpper(name: string): string {
+      return name.toUpperCase();
+    }
+
+    expect(sayHello('hidayat',toUpper)).toBe('Hello, HIDAYAT');
+
+    expect(sayHello('hidayat', function(name:string): string {
+      return name.toUpperCase();
+    })).toBe('Hello, HIDAYAT');
+
+    expect(sayHello('hidayat', (name:string): string => name.toUpperCase())).toBe('Hello, HIDAYAT');
   });
 });
