@@ -3,9 +3,18 @@ import { Employee, Manager } from "../src/methodoverriding";
 describe('Method Overriding', () => {
   it('should support', () => {
     const employee: Employee = new Employee('Budi');
-    expect(employee.sayHello('asep')).toBe('Hello asep, my name is Budi');
+    const infoSpy = jest.spyOn(global.console, 'info');
 
+    employee.sayHello('asep');
+    expect(infoSpy).toHaveBeenCalled();
+    expect(infoSpy).toHaveBeenCalledTimes(1);
+    expect(infoSpy).toHaveBeenCalledWith('Hello asep, my name is Budi');
+    jest.clearAllMocks();
+    
     const manager: Manager = new Manager('Yat');
-    expect(manager.sayHello('asep')).toBe('Hello asep, my name is Yat. I am your manager');
+    manager.sayHello('asep');
+    expect(infoSpy).toHaveBeenCalled();
+    expect(infoSpy).toHaveBeenCalledTimes(2);
+    expect(infoSpy).toHaveBeenLastCalledWith('I am your manager');
   });
 });

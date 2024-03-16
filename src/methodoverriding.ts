@@ -5,13 +5,14 @@ export class Employee{
 		this.name = name;
 	}
 	
-	sayHello(name: string): string{
-		return `Hello ${name}, my name is ${this.name}`;
+	sayHello(name: string): void{
+		console.info(`Hello ${name}, my name is ${this.name}`);
 	}
 }
 
 export class Manager extends Employee{
-	sayHello(name: string): string{
-		return `Hello ${name}, my name is ${this.name}. I am your manager`;
+	sayHello(name: string): void{
+    super.sayHello(name);
+		console.info(`I am your manager`);
 	}
 }
