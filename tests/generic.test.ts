@@ -56,6 +56,18 @@ describe('Multiple Generic Type', () => {
     constructor(public first: K, public second: V, public third: T) {}
   }
 
+  class SimpleGeneric<T> {
+    private value?: T;
+    
+    setValue(value: T) {
+      this.value = value;
+    }
+    
+    getValue(): T | undefined {
+      return this.value;
+    }
+  }
+
   it('should support', () => {
     const entry = new Entry<number, string>(1, 'Yat');
     expect(typeof entry.key).toBe('number');
@@ -65,5 +77,21 @@ describe('Multiple Generic Type', () => {
     expect(typeof triple.first).toBe('number');
     expect(typeof triple.second).toBe('string');
     expect(typeof triple.third).toBe('boolean');
+  });
+
+  it('should support optional generic type', () => {
+    const entry = new Entry(1, 'Yat');
+    // Error
+    // entry.key = '1';
+    // entry.value = 123;
+    expect(typeof entry.key).toBe('number');
+    expect(typeof entry.value).toBe('string');
+  });
+
+  it('should create simple generic', () => {
+    const simpleGeneric = new SimpleGeneric();
+    simpleGeneric.setValue('yat');
+    simpleGeneric.setValue(100);
+    simpleGeneric.setValue(true);
   });
 });
