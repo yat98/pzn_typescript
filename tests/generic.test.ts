@@ -46,3 +46,24 @@ describe('Generic Function', () => {
     expect(typeof result2).toBe('number');
   });
 });
+
+describe('Multiple Generic Type', () => {
+  class Entry<K,V>{
+    constructor(public key: K, public value: V) {}
+  }
+  
+  class Triple<K,V,T>{
+    constructor(public first: K, public second: V, public third: T) {}
+  }
+
+  it('should support', () => {
+    const entry = new Entry<number, string>(1, 'Yat');
+    expect(typeof entry.key).toBe('number');
+    expect(typeof entry.value).toBe('string');
+
+    const triple = new Triple<number, string, boolean>(1, 'Yat', true);
+    expect(typeof triple.first).toBe('number');
+    expect(typeof triple.second).toBe('string');
+    expect(typeof triple.third).toBe('boolean');
+  });
+});
