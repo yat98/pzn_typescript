@@ -56,7 +56,7 @@ describe('Multiple Generic Type', () => {
     constructor(public first: K, public second: V, public third: T) {}
   }
 
-  class SimpleGeneric<T> {
+  class SimpleGeneric<T = string> {
     private value?: T;
     
     setValue(value: T) {
@@ -91,7 +91,45 @@ describe('Multiple Generic Type', () => {
   it('should create simple generic', () => {
     const simpleGeneric = new SimpleGeneric();
     simpleGeneric.setValue('yat');
-    simpleGeneric.setValue(100);
-    simpleGeneric.setValue(true);
+    // simpleGeneric.setValue(100);
+    // simpleGeneric.setValue(true);
+  });
+});
+
+describe('Constraint', () => {
+  interface Employee {
+    id: string;
+    name: string;
+  }
+  
+  interface Manager extends Employee {
+    totalEmployee: number;
+  }
+  
+  interface VP extends Manager {
+    totalEmployee: number;
+  }
+  
+  class EmployeeData<T extends Employee> {
+    constructor(public employee: T) {}
+  }
+
+  it('should support constraint', () => {
+    const data1 = new EmployeeData<Employee>({
+      id: "1",
+      name: "Yat"
+    });
+
+    const data2 = new EmployeeData<Manager>({
+      id: "2",
+      name: "Eko",
+      totalEmployee: 20
+    });
+
+    expect(data1).toBeInstanceOf(EmployeeData);
+    expect(data2).toBeInstanceOf(EmployeeData);
+
+    // Error
+    // const data3 = new EmployeeData<string>('Yat');
   });
 });
