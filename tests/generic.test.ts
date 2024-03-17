@@ -133,3 +133,37 @@ describe('Constraint', () => {
     // const data3 = new EmployeeData<string>('Yat');
   });
 });
+
+describe('Colection', () => {
+  it('should support array', () => {
+    const array = new Array<string>();
+    array.push('yat');
+    array.push('eko');
+
+    // Error
+    // array.push(123);
+
+    expect(array[0]).toBe('yat');
+    expect(array[1]).toBe('eko');
+  });
+
+  it('should support set', () => {
+    const set = new Set<string>();
+    set.add('yat');
+    set.add('eko');
+    set.add('yat');
+
+    expect(set.size).toBe(2);
+    expect(set.has('yat')).toBe(true);
+    expect(set.has('eko')).toBe(true);
+  });
+
+  it('should support map', () => {
+    const map = new Map<string, number>();
+    map.set('yat', 100);
+    map.set('eko', 75);
+
+    expect(map.get('yat')).toBe(100);
+    expect(map.get('eko')).toBe(75);
+  });
+});
