@@ -167,3 +167,25 @@ describe('Colection', () => {
     expect(map.get('eko')).toBe(75);
   });
 });
+
+describe('Promise', () => {
+  async function fetchData(value: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      setTimeout(() => {
+        if(value === 'Yat') {
+          resolve('Hello ' + value);
+        } else {
+          reject('Not found');
+        }
+      }, 1000);
+    });
+  }
+
+  it('should support', async () => {
+    const result = await fetchData('Yat');
+    expect(result.toUpperCase()).toBe('HELLO YAT');
+    
+    await expect(fetchData('Yat')).resolves.toBe('Hello Yat');
+    await expect(fetchData('Eko')).rejects.toBe('Not found');
+  });
+});
